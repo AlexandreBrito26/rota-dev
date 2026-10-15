@@ -1,16 +1,101 @@
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
+  gap: 0.9rem;
+  padding: 1.25rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 8px 24px -12px rgb(0 0 0 / 12%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .title {
   margin: 0;
   font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+/* Indicador de completude */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+}
+
+.progressHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.progressValue {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.bar {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+    transition: width 0.4s ease;
+  }
+}
+
+/* Seções recolhíveis */
+.section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.5rem;
+
+  &[open] > .sectionTitle::after {
+    transform: rotate(180deg);
+  }
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '▾';
+    color: var(--color-muted);
+    transition: transform 0.2s ease;
+  }
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.25rem 0 0.5rem;
 }
 
 .field {
@@ -19,59 +104,233 @@
   gap: 0.35rem;
   font-size: 0.85rem;
   color: var(--color-muted);
+}
 
-  input,
-  textarea {
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: var(--color-bg);
-    color: var(--color-text);
-    resize: vertical;
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.empty {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
   }
 }
 
-.subtitle {
-  margin: 0.5rem 0 0;
-  font-size: 0.95rem;
+.row {
+  display: grid;
+  grid-template-columns: 1fr 9rem auto;
+  gap: 0.5rem;
+  align-items: center;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr auto;
+
+    select {
+      grid-column: 1 / -1;
+    }
+  }
 }
 
-.exp {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.75rem;
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
-  input,
-  textarea {
-    padding: 0.55rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font: inherit;
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+
+  &::placeholder {
+    color: color-mix(in srgb, var(--color-muted) 80%, transparent);
   }
 }
 
+textarea {
+  resize: vertical;
+}
+
+/* Cartões de item (experiência, formação etc.) */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-bg) 50%, transparent);
+}
+
+.cardLegend {
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+/* Chips de habilidades */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+
+  &:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+
+  input {
+    flex: 1 1 8rem;
+    width: auto;
+    min-width: 8rem;
+    padding: 0.3rem 0.4rem;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.35rem 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-accent);
+  font-size: 0.85rem;
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: color-mix(in srgb, var(--color-accent) 25%, transparent);
+    }
+  }
+}
+
+/* Botões */
 .add,
-.remove {
+.ghost,
+.danger,
+.iconDanger {
   font: inherit;
+  font-size: 0.85rem;
   cursor: pointer;
   border-radius: 8px;
-  padding: 0.45rem 0.8rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 .add {
+  padding: 0.55rem 0.8rem;
   border: 1px dashed var(--color-accent);
   background: transparent;
   color: var(--color-accent);
+
+  &:hover {
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  }
 }
 
-.remove {
+.ghost {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-muted);
+
+  &:hover:not(:disabled) {
+    color: var(--color-text);
+    border-color: var(--color-muted);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.danger {
   align-self: flex-end;
+  padding: 0.35rem 0.6rem;
   border: none;
   background: transparent;
   color: #dc2626;
+
+  &:hover {
+    background: rgb(220 38 38 / 10%);
+  }
+}
+
+.iconDanger {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: #dc2626;
+  font-size: 1.1rem;
+  line-height: 1;
+
+  &:hover {
+    background: rgb(220 38 38 / 10%);
+  }
 }

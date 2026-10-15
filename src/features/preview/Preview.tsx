@@ -11,10 +11,43 @@ export function Preview() {
     !resume.name &&
     !resume.summary &&
     resume.experiences.length === 0 &&
+    resume.education.length === 0 &&
     resume.skills.length === 0 &&
     resume.projects.length === 0 &&
     resume.certifications.length === 0 &&
+    resume.languages.length === 0 &&
     links.length === 0;
+
+  const educationBlock = resume.education.length > 0 ? (
+    <section>
+      <h3 className={styles.section}>Formação</h3>
+      <ul className={styles.projects}>
+        {resume.education.map((edu) => (
+          <li key={edu.id}>
+            <strong>{edu.course}</strong>
+            {edu.institution && <span> · {edu.institution}</span>}
+            {edu.period && <p className={styles.projectMeta}>{edu.period}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : null;
+
+  const languagesBlock = resume.languages.length > 0 ? (
+    <section>
+      <h3 className={styles.section}>Idiomas</h3>
+      <ul className={styles.projects}>
+        {resume.languages
+          .filter((l) => l.name.trim())
+          .map((lang) => (
+            <li key={lang.id}>
+              <strong>{lang.name}</strong>
+              {lang.level && <span className={styles.projectMeta}> · {lang.level}</span>}
+            </li>
+          ))}
+      </ul>
+    </section>
+  ) : null;
 
   const summaryBlock = resume.summary ? (
     <section>
@@ -121,6 +154,7 @@ export function Preview() {
         <div className={styles.body}>
           <aside className={styles.side}>
             {skillsBlock}
+            {languagesBlock}
             {certBlock}
             {linksBlock}
             {projectsBlock}
@@ -128,13 +162,16 @@ export function Preview() {
           <div>
             {summaryBlock}
             {expBlock}
+            {educationBlock}
           </div>
         </div>
       ) : (
         <>
           {summaryBlock}
           {expBlock}
+          {educationBlock}
           {skillsBlock}
+          {languagesBlock}
           {certBlock}
           {projectsBlock}
           {linksBlock}
