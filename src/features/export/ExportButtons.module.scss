@@ -26,3 +26,16 @@
     display: none;
   }
 }
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #dc2626;
+}

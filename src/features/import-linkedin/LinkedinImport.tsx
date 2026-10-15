@@ -10,9 +10,11 @@ export function LinkedinImport() {
   const [draft, setDraft] = useState<LinkedinDraft | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
   function handleParse() {
     setError(null);
+    setNotice(null);
     setDraft(parseLinkedinText(text));
   }
 
@@ -44,6 +46,7 @@ export function LinkedinImport() {
     });
     setDraft(null);
     setText('');
+    setNotice('Dados do LinkedIn aplicados ao currículo.');
   }
 
   function editExperience(id: string, patch: Partial<Experience>) {
@@ -61,6 +64,8 @@ export function LinkedinImport() {
       <p className={styles.hint}>
         Cole o texto do seu perfil (Sobre, Experiência e Habilidades). A revisão vem antes de aplicar.
       </p>
+
+      {notice && <p className={styles.success} role="status">{notice}</p>}
 
       {!draft && (
         <>

@@ -5,6 +5,7 @@ import { Preview } from '@/features/preview/Preview';
 import { ThemeToggle } from '@/features/theme/ThemeToggle';
 import { ImportGithub } from '@/features/import-github/ImportGithub';
 import { LinkedinImport } from '@/features/import-linkedin/LinkedinImport';
+import { TemplateSelect } from '@/features/preview/TemplateSelect';
 import { ExportButtons } from '@/features/export/ExportButtons';
 import styles from './App.module.scss';
 
@@ -15,7 +16,10 @@ export default function App() {
     <>
       <RouteCanvas />
       <header className={styles.header}>
-        <h1 className={styles.logo}>Rota Dev</h1>
+        <div>
+          <h1 className={styles.logo}>Rota Dev</h1>
+          <p className={styles.tagline}>Seu currículo como trajeto de carreira</p>
+        </div>
         <ThemeToggle />
       </header>
       <main className={styles.main}>
@@ -24,10 +28,13 @@ export default function App() {
           <LinkedinImport />
           <Editor />
         </div>
-        <div className={styles.column}>
-          <ExportButtons />
+        <section className={styles.previewCol} aria-label="Pré-visualização">
+          <div className={styles.toolbar}>
+            <TemplateSelect />
+            <ExportButtons />
+          </div>
           <Preview />
-        </div>
+        </section>
       </main>
     </>
   );

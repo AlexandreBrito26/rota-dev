@@ -1,16 +1,18 @@
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
+  gap: 0.6rem;
 }
 
 .title {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-muted);
 }
 
 .row {
@@ -19,6 +21,7 @@
 
   input {
     flex: 1;
+    min-width: 0;
     padding: 0.6rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: 8px;
@@ -35,7 +38,7 @@
 
     &:disabled {
       opacity: 0.6;
-      cursor: progress;
+      cursor: not-allowed;
     }
   }
 }
@@ -43,11 +46,5 @@
 .error {
   margin: 0;
   color: #dc2626;
-  font-size: 0.9rem;
-}
-
-.success {
-  margin: 0;
-  color: var(--color-accent);
   font-size: 0.9rem;
 }

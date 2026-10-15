@@ -1,16 +1,25 @@
 import { useResumeStore } from '@/features/editor/resumeStore';
 import { useTemplateStore } from './templateStore';
-import { TemplateSelect } from './TemplateSelect';
 import styles from './Preview.module.scss';
 
 export function Preview() {
   const resume = useResumeStore((s) => s.resume);
   const template = useTemplateStore((s) => s.template);
+  const isEmpty =
+    !resume.name &&
+    !resume.summary &&
+    resume.experiences.length === 0 &&
+    resume.skills.length === 0 &&
+    resume.projects.length === 0;
 
   return (
-    <>
-      <TemplateSelect />
-      <article className={`${styles.page} ${styles[template]}`} id="resume-print">
+    <article className={`${styles.page} ${styles[template] ?? ''}`} id="resume-print">
+      {isEmpty && (
+        <p className={styles.empty}>
+          Seu currículo aparece aqui conforme você preenche os dados ou importa do GitHub e do LinkedIn.
+        </p>
+      )}
+
       <header>
         <h2 className={styles.name}>{resume.name || 'Seu nome'}</h2>
         <p className={styles.role}>{resume.title}</p>
@@ -50,6 +59,7 @@ export function Preview() {
           </ul>
         </section>
       )}
+
       {resume.projects.length > 0 && (
         <section>
           <h3 className={styles.section}>Projetos em destaque</h3>
@@ -68,7 +78,6 @@ export function Preview() {
           </ul>
         </section>
       )}
-      </article>
-    </>
+    </article>
   );
 }
