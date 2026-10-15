@@ -1,7 +1,21 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+
+  @media print {
+    display: none;
+  }
+}
+
 .group {
   display: flex;
-  gap: 0.4rem;
   flex-wrap: wrap;
+  gap: 0.4rem;
 
   button {
     padding: 0.35rem 0.8rem;
@@ -9,7 +23,13 @@
     border-radius: 999px;
     background: transparent;
     color: var(--color-muted);
+    font-size: 0.85rem;
     cursor: pointer;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
   }
 
   .active {
@@ -17,4 +37,30 @@
     color: var(--color-accent);
     font-weight: 600;
   }
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.swatchActive {
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 2px var(--color-surface);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
 }

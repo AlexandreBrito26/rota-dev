@@ -38,7 +38,7 @@ interface ResumeState {
 
 export const emptyResume: Resume = {
   name: '',
-  title: 'Desenvolvedor Front-End',
+  title: '',
   email: '',
   summary: '',
   skills: [],

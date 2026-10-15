@@ -29,8 +29,8 @@ export default function App() {
           <Editor />
         </div>
         <section className={styles.previewCol} aria-label="Pré-visualização">
+          <TemplateSelect />
           <div className={styles.toolbar}>
-            <TemplateSelect />
             <ExportButtons />
           </div>
           <Preview />

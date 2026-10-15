@@ -1,8 +1,20 @@
+import { useResumeStore } from '@/features/editor/resumeStore';
+
 const TARGET_ID = 'resume-print';
 
-/** PDF: usa a caixa de impressão do navegador, com o CSS @media print do preview. */
+/**
+ * PDF: abre a impressão do navegador com o CSS @media print do preview.
+ * O título do documento vira o nome sugerido do arquivo.
+ */
 export function exportPdf() {
-  window.print();
+  const name = useResumeStore.getState().resume.name.trim();
+  const previous = document.title;
+  document.title = name ? `Curriculo - ${name}` : 'Curriculo';
+  try {
+    window.print();
+  } finally {
+    document.title = previous;
+  }
 }
 
 /** PNG: captura o preview com html2canvas (carregado só quando necessário). */

@@ -114,3 +114,68 @@
     display: none;
   }
 }
+
+.executive {
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .side {
+    padding: 1rem;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  }
+}
+
+.ats {
+  min-height: auto;
+  padding: 1.5rem;
+  border: none;
+  background: #fff;
+  color: #111;
+
+  .name {
+    font-size: 1.5rem;
+    color: #111;
+  }
+
+  .role,
+  .meta,
+  .projects p,
+  .projectMeta {
+    color: #333;
+  }
+
+  .section {
+    color: #111;
+    border-bottom: 1px solid #111;
+    padding-bottom: 0.2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .skills {
+    display: block;
+
+    li {
+      display: inline;
+      padding: 0;
+      border: none;
+      color: #111;
+      font-size: 0.95rem;
+    }
+
+    li:not(:last-child)::after {
+      content: ', ';
+    }
+  }
+
+  .projects a {
+    color: #111;
+  }
+}

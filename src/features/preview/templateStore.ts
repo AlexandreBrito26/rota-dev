@@ -1,19 +1,26 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { FontId, PaletteId, TemplateId } from './styleConfig';
 
-export const TEMPLATES = [
-  { id: 'clean', label: 'Clássico' },
-  { id: 'bold', label: 'Destaque' },
-  { id: 'minimal', label: 'Minimalista' },
-] as const;
-
-export type TemplateId = (typeof TEMPLATES)[number]['id'];
-
-interface TemplateState {
+interface StyleState {
   template: TemplateId;
+  palette: PaletteId;
+  font: FontId;
   setTemplate: (template: TemplateId) => void;
+  setPalette: (palette: PaletteId) => void;
+  setFont: (font: FontId) => void;
 }
 
-export const useTemplateStore = create<TemplateState>((set) => ({
-  template: 'clean',
-  setTemplate: (template) => set({ template }),
-}));
+export const useTemplateStore = create<StyleState>()(
+  persist(
+    (set) => ({
+      template: 'clean',
+      palette: 'rota',
+      font: 'sans',
+      setTemplate: (template) => set({ template }),
+      setPalette: (palette) => set({ palette }),
+      setFont: (font) => set({ font }),
+    }),
+    { name: 'rota-dev:style' },
+  ),
+);

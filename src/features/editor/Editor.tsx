@@ -15,7 +15,11 @@ export function Editor() {
 
       <label className={styles.field}>
         Cargo
-        <input value={resume.title} onChange={(e) => update({ title: e.target.value })} />
+        <input
+          placeholder="Ex.: Analista de Dados, Professora, Designer, Engenheiro"
+          value={resume.title}
+          onChange={(e) => update({ title: e.target.value })}
+        />
       </label>
 
       <label className={styles.field}>
@@ -39,6 +43,7 @@ export function Editor() {
       <label className={styles.field}>
         Habilidades (separadas por vírgula)
         <input
+          placeholder="Ex.: Excel, Comunicação, Power BI, Liderança"
           value={resume.skills.join(', ')}
           onChange={(e) =>
             update({
