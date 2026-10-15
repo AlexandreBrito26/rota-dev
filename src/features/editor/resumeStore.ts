@@ -31,6 +31,9 @@ export interface Resume {
 interface ResumeState {
   resume: Resume;
   update: (patch: Partial<Resume>) => void;
+  addExperience: () => void;
+  updateExperience: (id: string, patch: Partial<Experience>) => void;
+  removeExperience: (id: string) => void;
 }
 
 export const emptyResume: Resume = {
@@ -46,4 +49,25 @@ export const emptyResume: Resume = {
 export const useResumeStore = create<ResumeState>((set) => ({
   resume: emptyResume,
   update: (patch) => set((s) => ({ resume: { ...s.resume, ...patch } })),
+  addExperience: () =>
+    set((s) => ({
+      resume: {
+        ...s.resume,
+        experiences: [
+          ...s.resume.experiences,
+          { id: crypto.randomUUID(), role: '', company: '', period: '', description: '' },
+        ],
+      },
+    })),
+  updateExperience: (id, patch) =>
+    set((s) => ({
+      resume: {
+        ...s.resume,
+        experiences: s.resume.experiences.map((e) => (e.id === id ? { ...e, ...patch } : e)),
+      },
+    })),
+  removeExperience: (id) =>
+    set((s) => ({
+      resume: { ...s.resume, experiences: s.resume.experiences.filter((e) => e.id !== id) },
+    })),
 }));

@@ -30,3 +30,48 @@
     resize: vertical;
   }
 }
+
+.subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+}
+
+.exp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+
+  input,
+  textarea {
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font: inherit;
+  }
+}
+
+.add,
+.remove {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+}
+
+.add {
+  border: 1px dashed var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.remove {
+  align-self: flex-end;
+  border: none;
+  background: transparent;
+  color: #dc2626;
+}

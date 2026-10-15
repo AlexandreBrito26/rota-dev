@@ -9,8 +9,8 @@ export function Preview() {
 
   return (
     <>
-    <TemplateSelect />
-    <article className={`${styles.page} ${styles[template]}`} id="resume-print">
+      <TemplateSelect />
+      <article className={`${styles.page} ${styles[template]}`} id="resume-print">
       <header>
         <h2 className={styles.name}>{resume.name || 'Seu nome'}</h2>
         <p className={styles.role}>{resume.title}</p>
@@ -21,6 +21,22 @@ export function Preview() {
         <section>
           <h3 className={styles.section}>Sobre</h3>
           <p>{resume.summary}</p>
+        </section>
+      )}
+
+      {resume.experiences.length > 0 && (
+        <section>
+          <h3 className={styles.section}>Experiência</h3>
+          <ul className={styles.projects}>
+            {resume.experiences.map((exp) => (
+              <li key={exp.id}>
+                <strong>{exp.role}</strong>
+                {exp.company && <span> · {exp.company}</span>}
+                {exp.period && <p className={styles.projectMeta}>{exp.period}</p>}
+                {exp.description && <p>{exp.description}</p>}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
@@ -52,7 +68,7 @@ export function Preview() {
           </ul>
         </section>
       )}
-    </article>
+      </article>
     </>
   );
 }
