@@ -1,0 +1,28 @@
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-accent);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: progress;
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}

@@ -1,0 +1,47 @@
+// Paleta única do projeto, com variações para dia e noite.
+// Os tokens são CSS custom properties; o SCSS só gera as duas variantes.
+
+$palette-light: (
+  'bg': #f7f4ee,
+  'surface': #ffffff,
+  'text': #1c2130,
+  'muted': #6b7280,
+  'accent': #0f766e,
+  'accent-2': #d97706,
+  'route': #0f766e,
+  'border': #e5e0d6,
+);
+
+$palette-dark: (
+  'bg': #0f1420,
+  'surface': #171e2e,
+  'text': #e8ecf4,
+  'muted': #94a3b8,
+  'accent': #2dd4bf,
+  'accent-2': #fbbf24,
+  'route': #2dd4bf,
+  'border': #26304a,
+);
+
+@mixin emit-tokens($map) {
+  @each $name, $value in $map {
+    --color-#{$name}: #{$value};
+  }
+}
+
+:root {
+  @include emit-tokens($palette-light);
+  --radius: 12px;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root[data-theme='dark'] {
+  @include emit-tokens($palette-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include emit-tokens($palette-dark);
+  }
+}
