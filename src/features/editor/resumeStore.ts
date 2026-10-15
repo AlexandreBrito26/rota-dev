@@ -16,6 +16,19 @@ export interface Project {
   stars: number;
 }
 
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  year: string;
+}
+
+export interface ResumeLink {
+  id: string;
+  label: string;
+  url: string;
+}
+
 export interface Resume {
   name: string;
   title: string;
@@ -24,6 +37,8 @@ export interface Resume {
   skills: string[];
   experiences: Experience[];
   projects: Project[];
+  certifications: Certification[];
+  links: ResumeLink[];
   github?: string;
   linkedin?: string;
 }
@@ -44,6 +59,8 @@ export const emptyResume: Resume = {
   skills: [],
   experiences: [],
   projects: [],
+  certifications: [],
+  links: [],
 };
 
 export const useResumeStore = create<ResumeState>((set) => ({

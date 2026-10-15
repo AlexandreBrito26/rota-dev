@@ -6,12 +6,15 @@ import styles from './Preview.module.scss';
 export function Preview() {
   const resume = useResumeStore((s) => s.resume);
   const { template, palette, font } = useTemplateStore();
+  const links = resume.links.filter((l) => l.url.trim());
   const isEmpty =
     !resume.name &&
     !resume.summary &&
     resume.experiences.length === 0 &&
     resume.skills.length === 0 &&
-    resume.projects.length === 0;
+    resume.projects.length === 0 &&
+    resume.certifications.length === 0 &&
+    links.length === 0;
 
   const summaryBlock = resume.summary ? (
     <section>
@@ -66,6 +69,36 @@ export function Preview() {
     </section>
   ) : null;
 
+  const certBlock = resume.certifications.length > 0 ? (
+    <section>
+      <h3 className={styles.section}>Certificações</h3>
+      <ul className={styles.projects}>
+        {resume.certifications.map((c) => (
+          <li key={c.id}>
+            <strong>{c.name}</strong>
+            {c.issuer && <span> · {c.issuer}</span>}
+            {c.year && <p className={styles.projectMeta}>{c.year}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : null;
+
+  const linksBlock = links.length > 0 ? (
+    <section>
+      <h3 className={styles.section}>Portfólio e links</h3>
+      <ul className={styles.projects}>
+        {links.map((l) => (
+          <li key={l.id}>
+            <a href={l.url} target="_blank" rel="noreferrer">
+              {l.label || l.url}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ) : null;
+
   return (
     <article
       className={`${styles.page} ${styles[template] ?? ''}`}
@@ -88,6 +121,8 @@ export function Preview() {
         <div className={styles.body}>
           <aside className={styles.side}>
             {skillsBlock}
+            {certBlock}
+            {linksBlock}
             {projectsBlock}
           </aside>
           <div>
@@ -100,7 +135,9 @@ export function Preview() {
           {summaryBlock}
           {expBlock}
           {skillsBlock}
+          {certBlock}
           {projectsBlock}
+          {linksBlock}
         </>
       )}
     </article>
