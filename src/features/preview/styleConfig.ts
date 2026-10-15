@@ -1,11 +1,36 @@
 import type { CSSProperties } from 'react';
 
 export const TEMPLATES = [
-  { id: 'clean', label: 'Clássico' },
-  { id: 'bold', label: 'Destaque' },
-  { id: 'minimal', label: 'Minimalista' },
-  { id: 'executive', label: 'Executivo' },
-  { id: 'ats', label: 'ATS (RH)' },
+  {
+    id: 'clean',
+    label: 'Clássico',
+    desc: 'Coluna única, marcadores quadrados e linhas retas. Sóbrio e fácil de ler.',
+  },
+  {
+    id: 'bold',
+    label: 'Destaque',
+    desc: 'Faixa colorida no topo com monograma circular e habilidades em pílulas.',
+  },
+  {
+    id: 'minimal',
+    label: 'Minimalista',
+    desc: 'Sem caixas nem cores fortes. Muito espaço em branco e separadores finos.',
+  },
+  {
+    id: 'executive',
+    label: 'Executivo',
+    desc: 'Duas colunas, com painel lateral colorido e monograma circular.',
+  },
+  {
+    id: 'timeline',
+    label: 'Linha do tempo',
+    desc: 'Experiências em linha vertical, com nós circulares e habilidades arredondadas.',
+  },
+  {
+    id: 'ats',
+    label: 'ATS (RH)',
+    desc: 'Texto simples, preto no branco, para sistemas de triagem.',
+  },
 ] as const;
 
 export const PALETTES = [

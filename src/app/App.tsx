@@ -4,7 +4,6 @@ import { Editor } from '@/features/editor/Editor';
 import { Preview } from '@/features/preview/Preview';
 import { ThemeToggle } from '@/features/theme/ThemeToggle';
 import { ImportGithub } from '@/features/import-github/ImportGithub';
-import { LinkedinImport } from '@/features/import-linkedin/LinkedinImport';
 import { TemplateSelect } from '@/features/preview/TemplateSelect';
 import { ExportButtons } from '@/features/export/ExportButtons';
 import styles from './App.module.scss';
@@ -25,7 +24,6 @@ export default function App() {
       <main className={styles.main}>
         <div className={styles.column}>
           <ImportGithub />
-          <LinkedinImport />
           <Editor />
         </div>
         <section className={styles.previewCol} aria-label="Pré-visualização">

@@ -1,3 +1,5 @@
+/* Base (Clássico): coluna única, marcadores quadrados e linhas retas. */
+
 .page {
   padding: 2rem 2.25rem;
   border: 1px solid var(--color-border);
@@ -6,11 +8,18 @@
   min-height: 400px;
   box-shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 12px 32px -16px rgb(0 0 0 / 18%);
   line-height: 1.55;
+}
 
-  > header {
-    padding-bottom: 1rem;
-    border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-  }
+.head {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+}
+
+.headText {
+  min-width: 0;
 }
 
 .name {
@@ -33,12 +42,47 @@
   font-size: 0.9rem;
 }
 
+.monogram {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  margin: 0;
+}
+
 .section {
-  margin: 1.5rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0.6rem;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-muted);
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--color-route);
+    flex-shrink: 0;
+  }
 }
 
 .skills {
@@ -51,7 +95,7 @@
 
   li {
     padding: 0.25rem 0.7rem;
-    border-radius: 999px;
+    border-radius: 4px;
     border: 1px solid var(--color-route);
     color: var(--color-route);
     font-size: 0.85rem;
@@ -83,39 +127,6 @@
   color: var(--color-muted);
 }
 
-.bold {
-  border-top: 8px solid var(--color-accent);
-
-  .name {
-    color: var(--color-text);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-}
-
-.minimal {
-  border: none;
-  background: transparent;
-  box-shadow: none;
-  padding: 1rem 0;
-
-  > header {
-    border-bottom-color: var(--color-border);
-  }
-
-  .section {
-    color: var(--color-accent);
-  }
-}
-
-@media print {
-  .page {
-    border: none;
-    background: #fff;
-    color: #000;
-  }
-}
-
 .empty {
   margin: 0 0 1.25rem;
   padding: 0.75rem 1rem;
@@ -129,23 +140,221 @@
   }
 }
 
+/* Destaque: faixa colorida no topo, monograma e pílulas preenchidas. */
+
+.bold {
+  padding: 0;
+  overflow: hidden;
+
+  .head {
+    margin: 0;
+    padding: 2rem 2.25rem;
+    border: none;
+    background: var(--color-accent);
+  }
+
+  .name,
+  .role,
+  .meta {
+    color: #fff;
+  }
+
+  .role {
+    opacity: 0.9;
+  }
+
+  .monogram {
+    background: #fff;
+    color: var(--color-accent);
+    width: 84px;
+    height: 84px;
+    font-size: 1.8rem;
+  }
+
+  .flow {
+    padding: 1.5rem 2.25rem 2rem;
+  }
+
+  .section {
+    color: var(--color-accent);
+
+    &::before {
+      width: 4px;
+      height: 14px;
+      border-radius: 999px;
+    }
+  }
+
+  .skills li {
+    border-color: transparent;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 999px;
+  }
+}
+
+/* Minimalista: sem caixas, muito espaço e separadores finos. */
+
+.minimal {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0.5rem 0;
+
+  .head {
+    border-bottom-color: var(--color-border);
+    border-bottom-width: 1px;
+    padding-bottom: 1.25rem;
+  }
+
+  .name {
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+  }
+
+  .role {
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .flow > .block + .block {
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.25rem;
+  }
+
+  .section {
+    margin-top: 1.25rem;
+    font-size: 0.72rem;
+    color: var(--color-accent);
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .skills {
+    display: block;
+
+    li {
+      display: inline;
+      padding: 0;
+      border: none;
+      color: var(--color-text);
+    }
+
+    li:not(:last-child)::after {
+      content: ' · ';
+      color: var(--color-muted);
+    }
+  }
+}
+
+/* Executivo: duas colunas com painel lateral colorido. */
+
 .executive {
+  .head {
+    margin-bottom: 1.5rem;
+  }
+
   .body {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
 
-    @media (max-width: 800px) {
+    @media (max-width: 700px) {
       grid-template-columns: 1fr;
     }
   }
 
   .side {
-    padding: 1rem;
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.25rem;
+    border-radius: 16px;
+    background: var(--color-accent);
+    color: #fff;
+
+    .monogram {
+      align-self: center;
+      width: 92px;
+      height: 92px;
+      margin-bottom: 0.5rem;
+      background: #fff;
+      color: var(--color-accent);
+      font-size: 2rem;
+    }
+
+    .section {
+      color: rgb(255 255 255 / 80%);
+
+      &::before {
+        background: #fff;
+      }
+    }
+
+    .skills li {
+      border-color: rgb(255 255 255 / 60%);
+      color: #fff;
+    }
+
+    .projects a,
+    .projects p,
+    .projectMeta {
+      color: #fff;
+    }
+
+    .projects p,
+    .projectMeta {
+      opacity: 0.85;
+    }
+  }
+
+  .main {
+    padding-left: 0.5rem;
   }
 }
+
+/* Linha do tempo: experiências em linha vertical com nós circulares. */
+
+.timeline {
+  .section::before {
+    border-radius: 50%;
+  }
+
+  .experience {
+    position: relative;
+    margin-left: 0.5rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    gap: 1.25rem;
+
+    > li {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: calc(-1.5rem - 7px);
+        top: 0.35rem;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        box-shadow: 0 0 0 4px var(--color-surface);
+      }
+    }
+  }
+
+  .skills li {
+    border: none;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    color: var(--color-accent);
+  }
+}
+
+/* ATS: texto simples, preto no branco, sem decoração. */
 
 .ats {
   min-height: auto;
@@ -156,8 +365,12 @@
   line-height: 1.4;
   color: #111;
 
-  > header {
+  .head {
     border-bottom: none;
+  }
+
+  .monogram {
+    display: none;
   }
 
   .name {
@@ -177,6 +390,10 @@
     border-bottom: 1px solid #111;
     padding-bottom: 0.2rem;
     letter-spacing: 0.04em;
+
+    &::before {
+      display: none;
+    }
   }
 
   .skills {
@@ -197,5 +414,13 @@
 
   .projects a {
     color: #111;
+  }
+}
+
+@media print {
+  .page {
+    border: none;
+    background: #fff;
+    color: #000;
   }
 }

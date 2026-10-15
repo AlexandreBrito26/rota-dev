@@ -57,11 +57,7 @@ export function TemplateSelect() {
         ))}
       </div>
 
-      {neutral && (
-        <p className={styles.hint}>
-          Modelo ATS: texto simples, preto no branco, para sistemas de triagem e para o RH.
-        </p>
-      )}
+      <p className={styles.hint}>{TEMPLATES.find((t) => t.id === template)?.desc}</p>
     </div>
   );
 }
